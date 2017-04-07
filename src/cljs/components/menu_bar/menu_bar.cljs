@@ -12,7 +12,8 @@
             [:span {:class "icon-bar"}]
             [:span {:class "icon-bar"}]
             [:span {:class "icon-bar"}]]
-          [:a {:class "navbar-brand" :href "#/"} "Home"]]
+          [:a {:class "navbar-brand" :href "#/"}
+            [:img {:id "logo-pivx" :src "assets/PIVX.png" :alt "PIVX logo"}]]]
 
   [:div {:class "collapse navbar-collapse" :id "bs-example-navbar-collapse-1"}
 
