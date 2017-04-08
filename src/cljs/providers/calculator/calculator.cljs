@@ -1,12 +1,13 @@
-(ns providers.calculator
-  (:require [app.state :refer [app-state]]))
+(ns providers.calculator)
 
-(defn- calculate-stake-reward
+(def ^:private blocks-per-hour 60)
+
+(defn ^:private calculate-stake-reward
   "Return stake reward"
   [block-value mn-reward]
   (- (* 0.90 block-value) mn-reward))
 
-(defn- calculate-mn-reward
+(defn ^:private calculate-mn-reward
   "Return mn reward"
   [masternodes-count tot-supply block-value]
   (let [mn-supply (* masternodes-count 10000)]
@@ -100,8 +101,13 @@
 
 (defn calculate-block-reward
   "Return mn and stake rewards"
-  [masternodes-count tot-supply]
+   [masternodes-count tot-supply]
   (let [block-value 5
         mn-reward (calculate-mn-reward masternodes-count tot-supply block-value)
         st-reward (calculate-stake-reward block-value mn-reward)]
     {:masternode mn-reward :staking st-reward}))
+
+(defn waiting-time-masternode
+  "Return average waiting time in hours for a masternode payment"
+  [personnal-masternodes-count total-masternodes-count]
+  (/ total-masternodes-count (* personnal-masternodes-count blocks-per-hour)))
