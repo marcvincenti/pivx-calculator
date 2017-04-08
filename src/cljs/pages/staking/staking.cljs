@@ -2,5 +2,5 @@
 
 (defn component []
   [:div {:class "container"}
-    [:h1 {:class "page-header"} "@app-state"]
-    [:p "Hello, this is staking page"]])
+    [:h1 {:class "page-header"} "Staking 101"]
+    [:p "Hello, this is staking page."]])
