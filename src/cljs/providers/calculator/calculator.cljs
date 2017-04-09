@@ -1,6 +1,8 @@
-(ns providers.calculator)
+(ns providers.calculator
+  (:require [app.utils :as u]))
 
 (def ^:private blocks-per-hour 60)
+(def ^:private blocks-per-day (* 24 blocks-per-hour))
 
 (defn ^:private calculate-stake-reward
   "Return stake reward"
@@ -102,7 +104,7 @@
 (defn calculate-block-reward
   "Return mn and stake rewards"
    [masternodes-count tot-supply]
-  (let [block-value 5
+  (let [block-value 15
         mn-reward (calculate-mn-reward masternodes-count tot-supply block-value)
         st-reward (calculate-stake-reward block-value mn-reward)]
     {:masternode mn-reward :staking st-reward}))
@@ -110,4 +112,19 @@
 (defn waiting-time-masternode
   "Return average waiting time in hours for a masternode payment"
   [personnal-masternodes-count total-masternodes-count]
-  (/ total-masternodes-count (* personnal-masternodes-count blocks-per-hour)))
+  (let [in-hours (/ total-masternodes-count
+                    (* personnal-masternodes-count blocks-per-hour))
+        in-days (/ total-masternodes-count
+                (* personnal-masternodes-count blocks-per-day))]
+    (if (> in-days 1)
+      (str (u/format-number in-days) " days")
+      (str (u/format-number in-hours) " hours"))))
+
+(defn waiting-time-staking
+  "Return average waiting time in hours for staking payment"
+  [pivx total-staking-pivx]
+  (let [in-hours (/ total-staking-pivx (* pivx blocks-per-hour))
+        in-days (/ total-staking-pivx (* pivx blocks-per-day))]
+    (if (> in-days 1)
+      (str (u/format-number in-days) " days")
+      (str (u/format-number in-hours) " hours"))))

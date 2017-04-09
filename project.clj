@@ -2,7 +2,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.8.51"]
                  [reagent "0.5.1"]
-                 [secretary "1.2.3"]]
+                 [secretary "1.2.3"]
+                 [cljs-http "0.1.42"]]
   :min-lein-version "2.5.3"
   :source-paths ["src/clj"]
   :clean-targets ^{:protect false} ["resources/public/js" "target"]
