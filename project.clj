@@ -12,7 +12,6 @@
                         :source-paths ["src/cljs/"]
                         :compiler     {:main app.core
                                        :asset-path "js/out"
-                                       :externs    ["externs.js"]
                                        :output-to  "resources/public/js/app.js"
                                        :output-dir "resources/public/js/out"}}
                        {:id           "prod"

@@ -42,7 +42,7 @@
 ;Root function to run cljs app
 (defn ^:export run []
   (app-routes)
-  (masternodes/update-masternodes-data)
+  ;(masternodes/update-masternodes-data)
   (r/render [menu-bar/component] (.getElementById js/document "menu-bar"))
   (r/render [current-page]
     (.getElementById js/document "app-container")))

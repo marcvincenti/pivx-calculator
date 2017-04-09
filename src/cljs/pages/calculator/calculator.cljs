@@ -20,7 +20,7 @@
                   :checked (get-in @app-state [:calc :automatic?])
                   :on-change #(swap! app-state assoc-in [:calc :automatic?]
                       (not (get-in @app-state [:calc :automatic?])))}]
-         " Fill automatically inputs"]]]])
+         " Fill automatically PIVX stats"]]]])
 
 (defn api-form []
   (let [active? (get-in @app-state [:calc :automatic?])]
@@ -94,9 +94,17 @@
               "-")]
           [:td waiting-time-staking]]]]]))
 
+(defn disclaimer []
+  [:div {:class "alert alert-danger" :role "alert"}
+    [:strong "Disclaimer "]
+    "This is only an alpha version. The masternode count and the total supply
+    count are not yet synchronized to blockchain. Also, the percentage of
+    staked pivx is a guess and isn't calculated yet."])
+
 (defn component []
   [:div {:class "container"}
     [:h1 {:class "page-header"} "Rewards calculator"]
+    [disclaimer]
     [:div {:class "container col-sm-6"}
       [:div {:class "panel panel-default"}
         [:div {:class "panel-body"}
