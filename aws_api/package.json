@@ -1,0 +1,7 @@
+{
+  "name": "pivx-calculator-api",
+  "version": "1.0.0",
+  "description": "The api for the pivx-calculator app.",
+  "author": "Marc Vincenti",
+  "license": "MIT"
+}

@@ -1,0 +1,48 @@
+service: aws-pivx-calculator-api
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: python2.7
+  region: eu-west-1
+  environment:
+    DYNAMODB_TABLE: pivxdata
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  currency:
+    handler: cron-currency.currency
+    events:
+      - schedule: rate(5 minutes)
+      
+  endpoint:
+    handler: get-endpoint.list
+    events:
+      - http:
+          path: pivx
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: coin
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: coin
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
