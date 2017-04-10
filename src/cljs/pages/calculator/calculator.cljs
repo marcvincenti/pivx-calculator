@@ -1,7 +1,8 @@
 (ns pages.calculator
   (:require [app.state :refer [app-state]]
             [app.utils :as u]
-            [providers.calculator :as c]))
+            [providers.calculator :as c]
+            [providers.currency :as cur]))
 
 (defn user-form []
   [:form
@@ -13,6 +14,16 @@
                  :on-change #(swap! app-state assoc-in [:calc :pivx]
                                   (-> % .-target .-value))
                  :value (get-in @app-state [:calc :pivx])}]]]
+   [:div {:class "form-group"}
+     [:div {:class "input-group"}
+       [:div {:class "input-group-addon"} "Currency"]
+        [:select {:class "form-control"
+                  :on-change #(do (swap! app-state assoc-in
+                                    [:calc :currency :symbol]
+                                    (-> % .-target .-value))
+                                (cur/update-currency-data))
+                  :value (get-in @app-state [:calc :currency :symbol])}
+          (for [c cur/available] ^{:key c} [:option c])]]]
     [:div {:class "form-group"}
       [:div {:class "form-check"}
        [:label {:class "form-check-label"}

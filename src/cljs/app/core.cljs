@@ -7,6 +7,7 @@
             [reagent.core :as r]
             [app.state :refer [app-state]]
             [components.menu-bar :as menu-bar]
+            [providers.currency :as currency]
             [providers.masternodes :as masternodes]
             [pages.about :as about]
             [pages.calculator :as calculator]
@@ -42,7 +43,8 @@
 ;Root function to run cljs app
 (defn ^:export run []
   (app-routes)
-  ;(masternodes/update-masternodes-data)
+  (masternodes/update-masternodes-data)
+  (currency/update-currency-data)
   (r/render [menu-bar/component] (.getElementById js/document "menu-bar"))
   (r/render [current-page]
     (.getElementById js/document "app-container")))
