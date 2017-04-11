@@ -20,7 +20,10 @@ functions:
     handler: cron-currency.currency
     events:
       - schedule: rate(5 minutes)
-      
+  masternodes:
+    handler: cron-masternodes.masternodes
+    events:
+      - schedule: rate(3 minutes)
   endpoint:
     handler: get-endpoint.list
     events:

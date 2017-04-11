@@ -2,7 +2,6 @@ import os
 import boto3
 import urllib2
 import json
-import logging
 
 dynamodb = boto3.resource('dynamodb')
 url = 'https://api.coinmarketcap.com/v1/ticker/pivx/?convert=EUR'
