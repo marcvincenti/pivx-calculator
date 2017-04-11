@@ -106,9 +106,10 @@
 
 (defn disclaimer []
   [:div {:class "alert alert-warning" :role "alert"}
-    [:strong "Disclaimer "]
+    [:p [:strong "Disclaimer "]
     "The percentage of staked pivx is an estimation and isn't calculated
-     properly yet."])
+     properly yet."] [:p " But you can coffe me in PIVX here : "
+      [:b "DDWvZGoAuU2T1nAX9NPT6oUjWGHYzaD9gZ"]]])
 
 (defn component []
   [:div {:class "container"}
