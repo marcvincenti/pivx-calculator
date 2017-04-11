@@ -1,5 +1,6 @@
 (ns providers.calculator
-  (:require [app.utils :as u]))
+  (:require [app.utils :as u]
+            [app.state :refer [app-state]]))
 
 (def ^:private blocks-per-hour 60)
 (def ^:private blocks-per-day (* 24 blocks-per-hour))
@@ -128,3 +129,11 @@
     (if (> in-days 1)
       (str (u/format-number in-days) " days")
       (str (u/format-number in-hours) " hours"))))
+
+(defn pivx-to-currency
+  "Return a string with the value of pivx in the currency"
+  [pivx]
+  (let [cur (get-in @app-state [:calc :currency])
+        pivx-val (get-in @app-state [:currencies (keyword (clojure.string/lower-case cur))])
+        total (* pivx pivx-val)]
+    (str (u/format-number total) " " cur)))

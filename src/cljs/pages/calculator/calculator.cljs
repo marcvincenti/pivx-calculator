@@ -2,7 +2,7 @@
   (:require [app.state :refer [app-state]]
             [app.utils :as u]
             [providers.calculator :as c]
-            [providers.currency :as cur]))
+            [providers.api :as api]))
 
 (defn user-form []
   [:form
@@ -18,12 +18,11 @@
      [:div {:class "input-group"}
        [:div {:class "input-group-addon"} "Currency"]
         [:select {:class "form-control"
-                  :on-change #(do (swap! app-state assoc-in
-                                    [:calc :currency :symbol]
-                                    (-> % .-target .-value))
-                                (cur/update-currency-data))
-                  :value (get-in @app-state [:calc :currency :symbol])}
-          (for [c cur/available] ^{:key c} [:option c])]]]
+                  :on-change #(swap! app-state assoc-in
+                                [:calc :currency]
+                                (-> % .-target .-value))
+                  :value (get-in @app-state [:calc :currency])}
+          (for [c api/cur-available] ^{:key c} [:option c])]]]
     [:div {:class "form-group"}
       [:div {:class "form-check"}
        [:label {:class "form-check-label"}
@@ -96,8 +95,8 @@
                    :aria-valuenow st-score :aria-valuemin "0" :aria-valuemax "100"
                    :style {:width (str st-score "%")}} "Staking"]]]]
         [:tr [:th "Reward"]
-          [:td (str (u/format-number masternode) " PIVX")]
-          [:td (str (u/format-number staking) " PIVX")]]
+          [:td (str (u/format-number masternode) " PIVX ") [:sub (c/pivx-to-currency masternode)]]
+          [:td (str (u/format-number staking) " PIVX ") [:sub (c/pivx-to-currency staking)]]]
         [:tr [:th "Average waiting time"]
           [:td
             (if (> max-personnal-masternodes 0)
@@ -106,11 +105,10 @@
           [:td waiting-time-staking]]]]]))
 
 (defn disclaimer []
-  [:div {:class "alert alert-danger" :role "alert"}
+  [:div {:class "alert alert-warning" :role "alert"}
     [:strong "Disclaimer "]
-    "This is only an alpha version. The masternode count and the total supply
-    count are not yet synchronized to blockchain. Also, the percentage of
-    staked pivx is a guess and isn't calculated yet."])
+    "The percentage of staked pivx is an estimation and isn't calculated
+     properly yet."])
 
 (defn component []
   [:div {:class "container"}
