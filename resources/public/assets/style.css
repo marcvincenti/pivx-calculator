@@ -2,12 +2,23 @@
   max-height: 50px;
 }
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 #app-container {
   padding-top: 50px;
+  flex: 1;
 }
 
 .navbar {
   background-color: #000;
+}
+
+.navbar sub {
+  color: #FF0000;
 }
 
 .navbar-brand {
@@ -24,14 +35,16 @@
 }
 
 footer {
-  clear: both;
+    clear: both;
     height: 45px;
     line-height: 45px;
     background-color: #000;
     color: #fff;
-    position: absolute;
-    bottom: 0;
     width: 100%;
+}
+
+footer .container {
+  background-color: #000;
 }
 
 .mail {
