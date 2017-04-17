@@ -19,6 +19,5 @@
 
     [:ul {:class "nav navbar-nav"}
       [:li (active? :calculator) [:a {:href "#/"} "Calculator"]]
-      [:li (active? :staking) [:a {:href "#/staking"} "Staking"]]
-      [:li (active? :masternode) [:a {:href "#/masternode"} "Masternode"]]
+      [:li [:a {:target "_blank" :href "https://docs.google.com/forms/d/e/1FAIpQLSdzlYN3CGdHr-qRdH5IVmbeTFDsRenDQ36EhrSpSXYgRYxsVw/viewform"} "API " [:sub "beta"]]]
       [:li (active? :about) [:a {:href "#/about"} "About"]]]]]]))

@@ -9,9 +9,7 @@
             [components.menu-bar :as menu-bar]
             [providers.api :as api]
             [pages.about :as about]
-            [pages.calculator :as calculator]
-            [pages.masternode :as masternode]
-            [pages.staking :as staking]))
+            [pages.calculator :as calculator]))
 
 ;Adding Browser History
 (defn hook-browser-navigation! []
@@ -26,16 +24,12 @@
 (defn app-routes []
   (secretary/set-config! :prefix "#")
   (defroute "/" [] (swap! app-state assoc :page :calculator))
-  (defroute "/staking" [] (swap! app-state assoc :page :staking))
-  (defroute "/masternode" [] (swap! app-state assoc :page :masternode))
   (defroute "/about" [] (swap! app-state assoc :page :about))
   (hook-browser-navigation!))
 
 ;Current-page multimethod : return which page to display based on app-state
 (defmulti current-page #(@app-state :page))
 (defmethod current-page :calculator [] [calculator/component])
-(defmethod current-page :staking  [] [staking/component])
-(defmethod current-page :masternode [] [masternode/component])
 (defmethod current-page :about [] [about/component])
 (defmethod current-page :default  [] [:div])
 

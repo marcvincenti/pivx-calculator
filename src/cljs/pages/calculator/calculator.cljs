@@ -104,17 +104,9 @@
               "-")]
           [:td waiting-time-staking]]]]]))
 
-(defn disclaimer []
-  [:div {:class "alert alert-warning" :role "alert"}
-    [:p [:strong "Disclaimer "]
-    "The percentage of staked pivx is an estimation and isn't calculated
-     properly yet."] [:p " But you can coffe me in PIVX here : "
-      [:b "DDWvZGoAuU2T1nAX9NPT6oUjWGHYzaD9gZ"]]])
-
 (defn component []
   [:div {:class "container"}
     [:h1 {:class "page-header"} "Rewards calculator"]
-    [disclaimer]
     [:div {:class "container col-sm-6"}
       [:div {:class "panel panel-default"}
         [:div {:class "panel-body"}
