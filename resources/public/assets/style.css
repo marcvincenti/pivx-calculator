@@ -22,7 +22,17 @@ body {
 }
 
 .navbar-brand {
+  border: none;
   padding: 0 15px;
+  background-color: #000;
+}
+
+:focus {
+    outline: none;
+}
+
+.navbar-default .navbar-brand {
+  color: #fff;
 }
 
 .navbar-default .navbar-nav>li>a:hover {
@@ -32,6 +42,14 @@ body {
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
   background-color: #4D394B;
   color: #fff;
+}
+
+.navbar-brand img {
+  float: left;
+}
+
+.navbar-brand .caret {
+  margin-top: 22px;
 }
 
 footer {
