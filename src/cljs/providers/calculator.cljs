@@ -4,6 +4,7 @@
 
 (def ^:private blocks-per-hour 60)
 (def ^:private blocks-per-day (* 24 blocks-per-hour))
+(def ^:private blocks-per-month (* 30 blocks-per-day))
 
 (defn ^:private calculate-stake-reward
   "Return stake reward"
@@ -129,6 +130,16 @@
     (if (> in-days 1)
       (str (u/format-number in-days) " days")
       (str (u/format-number in-hours) " hours"))))
+
+(defn monthly-revenue-mn
+  "Return average revenue in a month for a masternode"
+  [own-mn total-mn reward-mn]
+  (/ (* own-mn blocks-per-month reward-mn) total-mn))
+
+(defn monthly-revenue-st
+  "Return average revenue in a month for stakers"
+  [own-pivx total-staking reward-st]
+  (/ (* own-pivx blocks-per-month reward-st) total-staking))
 
 (defn pivx-to-currency
   "Return a string with the value of pivx in the currency"

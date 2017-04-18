@@ -78,7 +78,10 @@
         mn-r (* (/ masternode mn-count) max-personnal-masternodes)
         staking-r (* (/ pivx staking-pivx) staking)
         mn-score (/ (* 100 mn-r) (+ mn-r staking-r))
-        st-score (- 100 mn-score)]
+        st-score (- 100 mn-score)
+        mn-cost (* 10000 max-personnal-masternodes)
+        mn-monthly (c/monthly-revenue-mn max-personnal-masternodes mn-count masternode)
+        st-monthly (c/monthly-revenue-st pivx staking-pivx staking)]
     [:div {:class "panel panel-default"}
       [:div {:class "panel-heading"} "Results"]
       [:table {:class "table"} [:tbody
@@ -94,6 +97,9 @@
             [:div {:class "progress-bar" :role "progressbar"
                    :aria-valuenow st-score :aria-valuemin "0" :aria-valuemax "100"
                    :style {:width (str st-score "%")}} "Staking"]]]]
+        [:tr [:th "Requirements"]
+          [:td (str max-personnal-masternodes "0K PIVX ") [:sub (c/pivx-to-currency mn-cost)]]
+          [:td "> 1 PIVX"]]
         [:tr [:th "Reward"]
           [:td (str (u/format-number masternode) " PIVX ") [:sub (c/pivx-to-currency masternode)]]
           [:td (str (u/format-number staking) " PIVX ") [:sub (c/pivx-to-currency staking)]]]
@@ -102,7 +108,10 @@
             (if (> max-personnal-masternodes 0)
               waiting-time-masternode
               "-")]
-          [:td waiting-time-staking]]]]]))
+          [:td waiting-time-staking]]
+        [:tr [:th "Monthly revenue"]
+          [:td (str (u/format-number mn-monthly) " PIVX ") [:sub (c/pivx-to-currency mn-monthly)]]
+          [:td (str (u/format-number st-monthly) " PIVX ") [:sub (c/pivx-to-currency st-monthly)]]]]]]))
 
 (defn component []
   [:div {:class "container"}
