@@ -5,7 +5,7 @@
             [app.state :refer [app-state]]))
 
 (def cur-available ["BTC", "EUR", "USD"])
-(def ^:private url "https://2wvjwdloqk.execute-api.eu-west-1.amazonaws.com/dev/pivx")
+(def ^:private url "https://318h5of2kh.execute-api.eu-west-1.amazonaws.com/dev/currency/pivx")
 
 (defn update-data
   "Load masternodes data from the blockchain"
