@@ -108,7 +108,7 @@
 (defn calculate-block-reward
   "Return mn and stake rewards"
    [masternodes-count tot-supply]
-  (let [block-value 10
+  (let [block-value 5
         mn-reward (calculate-mn-reward masternodes-count tot-supply block-value)
         st-reward (calculate-stake-reward block-value mn-reward)]
     {:masternode mn-reward :staking st-reward}))
